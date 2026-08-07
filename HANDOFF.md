@@ -20,7 +20,7 @@ CPU-validated; paper-level GPU reproduction has not been executed.**
 # Current reproduction
 
 - Local branch: `reproduction/llama31-8b`
-- Audited handoff tree: `HANDOFF_FINALIZED_AT_COMMIT_PENDING`
+- Audited handoff tree: `48086302bedf95120a5ff6166c00864eb59f9500`
 - Always confirm checkout with: `git rev-parse HEAD && git status --short --branch`
 
 # Completed

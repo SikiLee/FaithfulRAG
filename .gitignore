@@ -15,6 +15,12 @@ secrets/
 huggingface_cache/
 models/
 *.safetensors
+*.bin
+*.pt
+*.pth
+*.ckpt
+*.gguf
+*.onnx
 wandb/
 outputs/results/**
 !outputs/results/.gitkeep

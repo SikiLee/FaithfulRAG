@@ -3,7 +3,8 @@
 本文档对应官方仓库 `XMUDeepLIT/Faithful-RAG` 的 `main` 分支 commit
 `9181b1132f2f6548775e4f992a9a44fccdd018e9`；本地复现分支是
 `reproduction/llama31-8b`，审计 handoff tree 是
-`HANDOFF_FINALIZED_AT_COMMIT_PENDING`（checkout 后用 `git rev-parse HEAD` 确认当前 commit）。
+`48086302bedf95120a5ff6166c00864eb59f9500`（checkout 后用 `git rev-parse HEAD` 确认包含
+本段哈希记录的最终 docs commit）。
 准备目标是：在 Linux 主机拿到一张
 NVIDIA 24GB 或更大显存 GPU 后，先运行 5 条 smoke test，再执行 Llama 3.1 8B 的
 FaithEval、MuSiQue-negative、Full Context 和两个消融配置。
@@ -18,7 +19,7 @@ embedding、mock LLM 全链路、evaluation、CLI dry-run 和输出落盘测试�
 - upstream branch/commit：`main` / `9181b1132f2f6548775e4f992a9a44fccdd018e9`
 - upstream tag/release：不存在；论文对应源码 commit **UNKNOWN**。
 - reproduction branch：`reproduction/llama31-8b`
-- reproduction audited handoff tree：`HANDOFF_FINALIZED_AT_COMMIT_PENDING`
+- reproduction audited handoff tree：`48086302bedf95120a5ff6166c00864eb59f9500`
 - 论文：[arXiv:2506.08938v2](https://arxiv.org/abs/2506.08938)（v1 2025-06-10，
   v2 2025-07-08）；[ACL 2025 Long Paper](https://aclanthology.org/2025.acl-long.1062/)
 - 模型：[meta-llama/Llama-3.1-8B-Instruct](https://huggingface.co/meta-llama/Llama-3.1-8B-Instruct)，需要先接受许可并登录 Hugging Face

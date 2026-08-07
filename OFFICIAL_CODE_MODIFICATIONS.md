@@ -21,7 +21,7 @@ predictions or metrics**, not a security rating.
 ## Current reproduction
 
 - Branch: `reproduction/llama31-8b`
-- Audited handoff tree: `HANDOFF_FINALIZED_AT_COMMIT_PENDING`
+- Audited handoff tree: `48086302bedf95120a5ff6166c00864eb59f9500`
 - Resolve the checked-out commit: `git rev-parse HEAD`
 - Reproduction-only code lives under `repro/`, `scripts/`, `configs/reproduction/`,
   `tests/`, and the top-level reproduction documents/locks.
