@@ -25,7 +25,7 @@ from transformers import AutoTokenizer
 from .util import FormatConverter
 from .llm import LLMBackend
 from omegaconf import DictConfig
-from util import logger
+from .util import logger
 
 
 class FactMiningModule:

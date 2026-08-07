@@ -5,7 +5,7 @@ import asyncio
 import logging
 from functools import lru_cache
 from typing import Dict, List, Optional, Union
-from util import logger
+from ..util.logger import logger
 
 import torch
 from tenacity import (
@@ -131,7 +131,23 @@ async def hf_chat_completion(
     history_messages: List[Dict] = [],
     **generation_params
 ) -> str:
-    model, tokenizer, generation_config = initialize_hf_client(model_name)
+    device_map = generation_params.pop("device_map", "auto")
+    dtype_name = generation_params.pop("torch_dtype", "float16")
+    if isinstance(dtype_name, str):
+        dtype_name = dtype_name.replace("torch.", "")
+        torch_dtype = getattr(torch, dtype_name)
+    else:
+        torch_dtype = dtype_name
+    load_in_8bit = generation_params.pop("load_in_8bit", False)
+    load_in_4bit = generation_params.pop("load_in_4bit", False)
+    max_input_tokens = generation_params.pop("max_input_tokens", 8192)
+    model, tokenizer, generation_config = initialize_hf_client(
+        model_name,
+        device_map=device_map,
+        torch_dtype=torch_dtype,
+        load_in_8bit=load_in_8bit,
+        load_in_4bit=load_in_4bit,
+    )
     
     input_text = format_chat_messages(
         history_messages + [{"role": "user", "content": prompt}],
@@ -139,21 +155,26 @@ async def hf_chat_completion(
         system_prompt
     )
     
+    temperature = generation_params.get("temperature", 0.7)
+    do_sample = temperature is not None and float(temperature) > 0
     params = generation_config.to_dict()
     params.update({
         "max_new_tokens": generation_params.get("max_tokens", 512),
-        "temperature": generation_params.get("temperature", 0.7),
-        "top_p": generation_params.get("top_p", 0.9),
         "num_return_sequences": 1,
-        "do_sample": True,
+        "do_sample": do_sample,
         "pad_token_id": tokenizer.pad_token_id,
         "eos_token_id": tokenizer.eos_token_id,
     })
+    if do_sample:
+        params["temperature"] = temperature
+        params["top_p"] = generation_params.get("top_p", 0.9)
     
-    generation_params.pop("max_tokens", None)
     generation_params.pop("hashing_kv", None)
     generation_params.pop("keyword_extraction", None)
     generation_params.pop("max_tokens", None)
+    generation_params.pop("temperature", None)
+    generation_params.pop("top_p", None)
+    generation_params.pop("response_format", None)
     
     params.update(generation_params)
     
@@ -163,7 +184,7 @@ async def hf_chat_completion(
             return_tensors="pt", 
             padding=True, 
             truncation=True,
-            max_length=8192  
+            max_length=max_input_tokens
         ).to(model.device)
         
         stop_token_ids = [tokenizer.eos_token_id]

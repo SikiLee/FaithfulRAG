@@ -1,0 +1,8 @@
+name: faithfulrag-repro
+channels:
+  - conda-forge
+dependencies:
+  - python=3.10.16
+  - pip=24.3.1
+  - pip:
+      - -r requirements-repro.txt

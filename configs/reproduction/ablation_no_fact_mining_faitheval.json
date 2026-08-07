@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "experiment_name": "ablation_no_fact_mining_faitheval_llama31_8b",
+  "method": "no_fact_mining",
+  "configuration_class": "CUSTOM_ABLATION_CONFIG",
+  "ablation_scope": "Wrapper-defined: skip all three Self-Fact Mining stages and Contextual Knowledge Alignment, then apply the repository structured scheduled-CoT prompt to full context without facts. This exact aggregate ablation is not Table 3 in the paper.",
+  "dataset": {"name": "FaithEval-counterfactual", "path": "datas/faitheval_data.json", "split": "train", "context_variant": "counterfactual", "expected_samples": 1000, "expected_sha256": "befa1dcce8cfb49538081f903d78c6df69115c5eed0fa4bd318b9aff6f01ffa3"},
+  "model": {"backend": "hf", "name": "meta-llama/Llama-3.1-8B-Instruct", "requested_revision": null, "observed_revision_2026_08_08": "0e9e39f249a16976918f6564b8830bc894c89659", "revision_status": "UNPINNED_BY_UPSTREAM_PUBLIC_API", "paper_backend": "vllm", "backend_config": {"device_map": "auto", "torch_dtype": "float16", "max_input_tokens": 8192, "max_concurrency": 1}},
+  "embedding": {"model": null},
+  "mining": null,
+  "alignment": null,
+  "generation_type": "scheduled_cot",
+  "generation": {"temperature": 0.0, "top_p": 1.0, "top_k": -1, "max_tokens": 1000},
+  "evaluation": {"mode": "author_repository_metrics_plus_separate_audit"},
+  "seed": 42,
+  "output_root": "outputs/results"
+}

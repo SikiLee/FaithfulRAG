@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "experiment_name": "fullcontext_musique_negative_llama31_8b",
+  "method": "full_context",
+  "configuration_class": "PAPER_BASELINE_RECONSTRUCTION_PUBLIC_HF_PROXY",
+  "dataset": {
+    "name": "MuSiQue-negative",
+    "path": "datas/musique_negative.json",
+    "paired_golden_path": "datas/musique_golden.json",
+    "split": "train",
+    "context_variant": "negative",
+    "expected_samples": 1772,
+    "expected_sha256": "a480349414c4d273fb3a7ee7cbc9a87e9ca4f071b95ed057810a885d37eee248",
+    "paired_golden_sha256": "93818b6bfef75712a55ba918879c399456ec1ea2aa70fbb97b60fab5b52a684a"
+  },
+  "model": {"backend": "hf", "name": "meta-llama/Llama-3.1-8B-Instruct", "requested_revision": null, "observed_revision_2026_08_08": "0e9e39f249a16976918f6564b8830bc894c89659", "revision_status": "UNPINNED_BY_UPSTREAM_PUBLIC_API", "paper_backend": "vllm", "backend_config": {"device_map": "auto", "torch_dtype": "float16", "max_input_tokens": 8192, "max_concurrency": 1}},
+  "embedding": {"model": null},
+  "mining": null,
+  "alignment": null,
+  "generation_type": "wo_cot",
+  "generation": {"temperature": 0.0, "top_p": 1.0, "top_k": -1, "max_tokens": 1000},
+  "evaluation": {"mode": "author_repository_metrics_plus_separate_audit"},
+  "seed": 42,
+  "output_root": "outputs/results"
+}

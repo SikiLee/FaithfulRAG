@@ -5,7 +5,7 @@ import sys
 from typing import Dict, List, Optional, Callable, Any, Coroutine
 from tqdm.asyncio import tqdm_asyncio
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-from util import logger
+from ..util.logger import logger
 
 
 class LLMBackend:
@@ -67,6 +67,9 @@ class LLMBackend:
         
         self.backend_type = backend_type
         self.model_name = model_name
+        self.max_concurrency = int(
+            backend_config.pop("max_concurrency", 1 if backend_type == "hf" else 10)
+        )
         self.backend_config = backend_config
         self.complete_fn: Callable[..., Coroutine[Any, Any, str]] = self.BACKENDS[backend_type]
         
@@ -120,7 +123,7 @@ class LLMBackend:
 
         # Use tqdm.asyncio.gather to show progress bar with concurrency limit
         # Limit concurrent requests to avoid overwhelming the server
-        semaphore = asyncio.Semaphore(10)  # Limit to 10 concurrent requests
+        semaphore = asyncio.Semaphore(self.max_concurrency)
         
         async def limited_task(task):
             async with semaphore:
