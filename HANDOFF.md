@@ -21,6 +21,8 @@ CPU-validated; paper-level GPU reproduction has not been executed.**
 
 - Local branch: `reproduction/llama31-8b`
 - Audited handoff tree: `48086302bedf95120a5ff6166c00864eb59f9500`
+- Public repository: <https://github.com/SikiLee/FaithfulRAG>
+- Published README baseline: `357a6a76289a438d2c48277930b963bd615862d5`
 - Always confirm checkout with: `git rev-parse HEAD && git status --short --branch`
 
 # Completed
@@ -122,9 +124,11 @@ Each run stores `status.json`, `trace.json`, `metrics.json`, `predictions.json`,
 # Backup
 
 - Copy A: `D:\论文\复现\Faithful-RAG`
-- Current `origin` is the authors' public repository, not a confirmed user-owned private
-  remote. **Nothing was pushed. Do not push this branch to `origin`.**
-- After creating an empty private repository, back up with:
+- Copy B: public GitHub repository <https://github.com/SikiLee/FaithfulRAG>.
+- `origin`: `https://github.com/SikiLee/FaithfulRAG.git`; published to remote `main`.
+- `upstream`: `https://github.com/XMUDeepLIT/Faithful-RAG.git`; never push reproduction work
+  there.
+- Optional private mirror:
 
   ```bash
   git remote add private <YOUR_PRIVATE_REPOSITORY_URL>

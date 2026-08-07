@@ -7,7 +7,7 @@ predictions or metrics**, not a security rating.
 ## Upstream
 
 - Repository: <https://github.com/XMUDeepLIT/Faithful-RAG>
-- Remote: `origin`
+- Remote: `upstream`
 - Branch: `main`
 - Commit: `9181b1132f2f6548775e4f992a9a44fccdd018e9`
 - Tag/release: none in the Git repository; no paper-specific code tag was found.

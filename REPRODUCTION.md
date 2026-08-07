@@ -15,6 +15,7 @@ embedding、mock LLM 全链路、evaluation、CLI dry-run 和输出落盘测试�
 
 ## 1. 版本与来源
 
+- 复现工程仓库：[SikiLee/FaithfulRAG](https://github.com/SikiLee/FaithfulRAG)
 - 代码仓库：[XMUDeepLIT/Faithful-RAG](https://github.com/XMUDeepLIT/Faithful-RAG)
 - upstream branch/commit：`main` / `9181b1132f2f6548775e4f992a9a44fccdd018e9`
 - upstream tag/release：不存在；论文对应源码 commit **UNKNOWN**。
